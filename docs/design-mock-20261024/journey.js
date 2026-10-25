@@ -119,6 +119,7 @@
     });
     function update() {
       const d=data();
+      if ($('#intention-count')) $('#intention-count').textContent=`${(d.intention||'').length} / 200`;
       save.disabled=kind==='before' ? !d.intention?.trim() : !(d.outcome || d.good?.trim() || d.next?.trim());
       if ($('#outcome-help')) $('#outcome-help').textContent=d.outcome==='試す機会がなかった' ? '試せなかった日も、そのまま残そう。' : '選ばずに、言葉だけ残しても大丈夫。';
       show($('[data-clear-outcome]'),Boolean(d.outcome));
