@@ -1,5 +1,5 @@
 /* Phase 1 static prototype. Load AFTER the four existing stylesheets.
-   No new color, shadow, radius or spacing tokens. Production files stay untouched. */
+   The user-requested reference palette is scoped at the end. Production files stay untouched. */
 body.lms-body.mock-app[data-page="onboarding"] .lms-side,
 body.lms-body.mock-app[data-page="onboarding"] .osn-tabbar,
 body.lms-body.mock-app[data-page="onboarding"] .account-profile-link { display:none; }
@@ -1328,3 +1328,220 @@ body.lms-body.mock-app .mock-preview { min-height:44px; padding:0 var(--sp-4); }
 body.lms-body.mock-app .mock-preview a { min-height:44px; display:inline-flex; align-items:center; padding:var(--sp-1) 0; }
 
 body.lms-body.mock-app .account-identity .account-avatar { width:56px; height:56px; padding:var(--sp-3); flex:none; background:var(--accent-soft); color:var(--accent-ink); border-radius:var(--radius); }
+
+/* Reference direction requested by the user: Zutool / UI Pocket 2026-08.
+   Flat turquoise navigation, compact controls, neutral record surfaces.
+   Palette is scoped to this preview; the existing Gothic font stack is unchanged. */
+body.lms-body.mock-app {
+ --accent:#4bb3b6; --accent-deep:#136e73; --accent-ink:#136e73; --accent-pressed:#105b60; --accent-soft:#e8f5f5;
+ --pp-base:#f0f2f3; --pp-ink:#263638; --pp-gray:#5b6b6d; --pp-line:#e4e7e8; --pp-line-strong:#cdd4d5;
+ background:var(--pp-base); color:var(--pp-ink);
+}
+body.lms-body.mock-app .lms-app { min-height:100dvh; }
+body.lms-body.mock-app .lms-mobile-bar { background:var(--accent); border:0; height:64px; min-height:64px; position:sticky; top:0; z-index:50; }
+body.lms-body.mock-app .bar-title { display:flex; flex-direction:column; gap:0; color:var(--pp-ink); text-align:center; line-height:1.5; }
+body.lms-body.mock-app .desktop-brand { font-size:16px; font-weight:700; }
+body.lms-body.mock-app .mobile-page-title { display:none; }
+body.lms-body.mock-app .header-demo { font-size:10px; font-weight:400; color:var(--pp-ink); }
+body.lms-body.mock-app .app-menu-trigger { display:none !important; }
+body.lms-body.mock-app .header-person-actions { gap:var(--sp-3); }
+body.lms-body.mock-app .language-trigger { color:var(--pp-ink) !important; width:44px; padding:0 !important; }
+body.lms-body.mock-app .bar-person { color:var(--pp-ink); background:transparent; }
+body.lms-body.mock-app .account-profile-link .profile-symbol { color:var(--pp-ink); }
+body.lms-body.mock-app .mock-preview { background:var(--pp-base); border:0; padding:var(--sp-4); margin:0 0 80px; z-index:1; font-size:10px; justify-content:center; flex-wrap:wrap; }
+body.lms-body.mock-app .mock-preview a { font-size:12px; }
+body.lms-body.mock-app .side-brand { padding-bottom:var(--sp-4); }
+body.lms-body.mock-app .side-brand .brand-symbol { background:var(--accent); color:var(--pp-ink); }
+body.lms-body.mock-app .side-person { border-radius:0; background:transparent; border-top:1px solid var(--pp-line); }
+body.lms-body.mock-app .side-nav { gap:0; }
+body.lms-body.mock-app .side-nav a { border-radius:0; }
+body.lms-body.mock-app .side-bottom { border-top:1px solid var(--pp-line); margin-top:var(--sp-6); }
+body.lms-body.mock-app main.lms-content { padding-top:var(--sp-5) !important; }
+body.lms-body.mock-app .page-heading { margin-bottom:var(--sp-4); }
+body.lms-body.mock-app .page-heading .muted { font-size:14px; margin-top:var(--sp-1); }
+body.lms-body.mock-app .surface,body.lms-body.mock-app .account-panel { border-radius:0; box-shadow:none; }
+body.lms-body.mock-app .mock-control { font-weight:600; }
+body.lms-body.mock-app .mock-control.mock-primary { background:var(--accent-deep) !important; }
+body.lms-body.mock-app .mock-control.mock-primary:hover { background:var(--accent-pressed) !important; }
+body.lms-body.mock-app .mock-control:disabled { background:var(--pp-line) !important; color:var(--pp-gray) !important; }
+body.lms-body.mock-app .save-dock { border-top:1px solid var(--pp-line); padding:var(--sp-3) var(--sp-4) !important; }
+body.lms-body.mock-app .dock-copy { margin-bottom:var(--sp-2); font-size:12px; }
+body.lms-body.mock-app .breadcrumb { margin-bottom:var(--sp-2); }
+body.lms-body.mock-app .app-menu { width:320px; max-width:calc(100vw - 32px); padding:0; border:0; border-radius:var(--radius); }
+body.lms-body.mock-app .app-menu-heading { display:flex; align-items:center; justify-content:space-between; padding:var(--sp-2) var(--sp-4); background:var(--accent); }
+body.lms-body.mock-app .app-menu-heading h2 { font-size:16px !important; margin:0 !important; }
+body.lms-body.mock-app .app-menu-heading .mock-control { color:var(--pp-ink) !important; width:44px; padding:0 !important; }
+body.lms-body.mock-app .app-menu-nav { padding:var(--sp-2) 0; }
+body.lms-body.mock-app .app-menu-nav a { display:flex; align-items:center; gap:var(--sp-4); min-height:48px; padding:var(--sp-3) var(--sp-5); font-size:14px; color:var(--pp-ink); }
+body.lms-body.mock-app .app-menu-nav a[aria-current] { color:var(--accent-deep); background:var(--accent-soft); }
+body.lms-body.mock-app .app-menu-nav a:hover { background:var(--pp-base); }
+body.lms-body.mock-app .app-menu-nav .ico { width:20px; height:20px; }
+
+/* Daily log: the two actions share one record surface. Haru is a small helper row. */
+body.lms-body.mock-app[data-page=home] .page-heading { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); margin:0; }
+body.lms-body.mock-app .home-date-line { display:grid; grid-template-columns:44px minmax(0,1fr) 44px auto; align-items:center; gap:var(--sp-1); margin:0 0 var(--sp-3); background:var(--pp-white); padding:0 var(--sp-2); }
+body.lms-body.mock-app .home-date-line p { font-size:16px; text-align:center; color:var(--pp-ink); font-weight:600; margin:0; }
+body.lms-body.mock-app .home-date-line .mock-control { padding:0 !important; }
+body.lms-body.mock-app .home-date-line .mock-control .ico { width:18px; height:18px; }
+body.lms-body.mock-app .home-date-line #home-calendar { padding:0 var(--sp-2); font-size:12px; min-height:44px; display:flex; align-items:center; }
+body.lms-body.mock-app .home-layout { grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr); grid-template-areas:'start agenda' 'tasks goal' 'recent weekly' 'recent gallery'; gap:var(--sp-4); }
+body.lms-body.mock-app .home-start { background:var(--pp-white); padding:0; border-radius:0; }
+body.lms-body.mock-app .home-section-title { display:flex; align-items:center; justify-content:space-between; padding:var(--sp-3) var(--sp-4) 0; }
+body.lms-body.mock-app .home-section-title h2 { font-size:14px !important; margin:0 !important; }
+body.lms-body.mock-app .home-section-title .quiet-link { display:flex; align-items:center; min-height:36px; font-size:12px; }
+body.lms-body.mock-app .home-start-options { display:grid; grid-template-columns:1fr 1fr; gap:0; margin:0; padding:0 var(--sp-2); }
+body.lms-body.mock-app .home-start-option,body.lms-body.mock-app .home-start-option.is-next { background:var(--pp-white); color:var(--pp-ink); padding:var(--sp-3) var(--sp-2) var(--sp-4); min-height:112px; border:0; border-radius:0; gap:var(--sp-2); flex-direction:column; align-items:flex-start; }
+body.lms-body.mock-app .home-start-option + .home-start-option { border-left:1px solid var(--pp-line); }
+body.lms-body.mock-app .home-start-option:hover,body.lms-body.mock-app .home-start-option.is-next:hover { background:var(--accent-soft); color:var(--pp-ink); }
+body.lms-body.mock-app .home-action-icon { display:none; }
+body.lms-body.mock-app .home-start-copy { display:flex; flex-direction:column; gap:var(--sp-1); width:100%; }
+body.lms-body.mock-app .home-start-time { color:var(--pp-gray) !important; font-size:12px; }
+body.lms-body.mock-app .home-start-copy strong { font-size:16px; font-weight:600; color:var(--accent-deep); }
+body.lms-body.mock-app .home-start-help { color:var(--pp-gray) !important; font-size:12px; line-height:1.5; }
+body.lms-body.mock-app .home-start-option .continuity-arrow { display:none; }
+body.lms-body.mock-app .home-haru { background:var(--accent-soft); border-radius:0; display:flex; align-items:center; gap:var(--sp-2); padding:var(--sp-2) var(--sp-3); }
+body.lms-body.mock-app .home-haru img { width:48px; height:56px; align-self:center; }
+body.lms-body.mock-app .home-haru-copy { flex:1; }
+body.lms-body.mock-app .home-haru .manager-name { font-size:10px; margin:0 0 var(--sp-1); font-weight:400; color:var(--pp-gray); }
+body.lms-body.mock-app #home-start-heading { font-size:12px; color:var(--pp-ink); line-height:1.5; }
+body.lms-body.mock-app .home-haru-copy > .muted { display:none; }
+body.lms-body.mock-app .home-haru > .quiet-link { font-size:12px; min-height:44px; display:flex; align-items:center; white-space:nowrap; padding-left:var(--sp-2); border-left:1px solid var(--pp-line-strong); margin:0; }
+body.lms-body.mock-app .home-theme-preview { margin:0; padding:var(--sp-3) var(--sp-4); border-top:1px solid var(--pp-line); }
+body.lms-body.mock-app .home-theme-preview p { font-size:14px; }
+body.lms-body.mock-app .home-section { background:var(--pp-white); padding:0; }
+body.lms-body.mock-app .home-section .section-heading { margin:0; min-height:44px; padding:var(--sp-2) var(--sp-4); border-bottom:1px solid var(--pp-line); }
+body.lms-body.mock-app .home-section .section-heading h2 { font-size:14px !important; }
+body.lms-body.mock-app .home-section .quiet-link { font-size:12px; display:flex; align-items:center; min-height:44px; }
+body.lms-body.mock-app .continuity-list { border-radius:0; }
+body.lms-body.mock-app .continuity-empty { padding:var(--sp-4); font-size:12px; line-height:1.5; }
+body.lms-body.mock-app .continuity-row { padding:var(--sp-3) var(--sp-4); }
+body.lms-body.mock-app .continuity-row-copy strong { font-size:14px; font-weight:400; }
+body.lms-body.mock-app .home-goal { background:var(--pp-white); padding:var(--sp-4); border:0; border-radius:0; margin:0; }
+body.lms-body.mock-app .goal-section-label { margin:0 0 var(--sp-2); }
+body.lms-body.mock-app .goal-section-label > span:first-child { color:var(--pp-gray); font-weight:400; }
+body.lms-body.mock-app .home-goal h2 { font-size:14px !important; font-weight:600; }
+body.lms-body.mock-app .manager-profile-link { margin:var(--sp-2) 0 0; border-top:1px solid var(--pp-line); padding-top:var(--sp-2); }
+body.lms-body.mock-app .home-weekly-section > .row-link,body.lms-body.mock-app .home-gallery-entry { padding:var(--sp-3) var(--sp-4); background:var(--pp-white); border-radius:0; }
+body.lms-body.mock-app .home-gallery-entry { margin:0; }
+body.lms-body.mock-app .home-start > #home-daily > .row-link { padding:var(--sp-3) var(--sp-4); }
+
+/* One tab language across notes, tasks and the before/after forms. */
+body.lms-body.mock-app .daily-tabs,body.lms-body.mock-app .task-views,body.lms-body.mock-app .guide-topics { background:var(--accent); padding:var(--sp-1); border:0; border-radius:0; gap:var(--sp-1); }
+body.lms-body.mock-app .daily-tabs a { min-height:52px; border:0; padding:var(--sp-1) var(--sp-2); color:var(--pp-ink); }
+body.lms-body.mock-app .daily-tabs a > span { font-size:10px; }
+body.lms-body.mock-app .daily-tabs a > strong { font-size:14px; }
+body.lms-body.mock-app .daily-tabs a[aria-current] { background:var(--pp-white); color:var(--accent-deep); }
+body.lms-body.mock-app .daily-context { margin-bottom:var(--sp-2); }
+body.lms-body.mock-app .daily-form { padding:var(--sp-4); }
+body.lms-body.mock-app .daily-intro h2 { font-size:16px !important; }
+body.lms-body.mock-app .daily-main-field textarea { min-height:120px; }
+body.lms-body.mock-app .task-main { border-radius:0; padding:var(--sp-4); }
+body.lms-body.mock-app .task-views { margin:calc(-1 * var(--sp-4)) calc(-1 * var(--sp-4)) var(--sp-3); }
+body.lms-body.mock-app .task-views a { min-height:44px; border:0; border-radius:var(--radius); color:var(--pp-ink); font-size:12px; font-weight:400; }
+body.lms-body.mock-app .task-views a[aria-current] { background:var(--pp-white); color:var(--accent-deep); font-weight:600; }
+body.lms-body.mock-app .task-quick-caption { margin-bottom:var(--sp-3); }
+body.lms-body.mock-app .task-tools { margin-top:var(--sp-3); }
+body.lms-body.mock-app .task-list-heading { margin:var(--sp-3) 0; }
+body.lms-body.mock-app .task-row { padding-top:var(--sp-3); padding-bottom:var(--sp-3); }
+body.lms-body.mock-app .task-context { padding:var(--sp-4); background:var(--pp-white); border:0; }
+body.lms-body.mock-app .calendar-toolbar { margin:0; padding:var(--sp-1) var(--sp-2); background:var(--pp-white); gap:var(--sp-2); }
+body.lms-body.mock-app .calendar-period { gap:0; }
+body.lms-body.mock-app #calendar-label { font-size:16px !important; }
+body.lms-body.mock-app .calendar-mode { padding:0; border-radius:var(--radius); background:var(--pp-base); }
+body.lms-body.mock-app .calendar-mode .mock-control { min-height:44px !important; width:44px; padding:0 var(--sp-2) !important; }
+body.lms-body.mock-app .calendar-mode .mock-control[aria-pressed=true] { background:var(--accent-deep) !important; color:var(--pp-white) !important; }
+body.lms-body.mock-app .calendar-actions { margin:0; padding:0 var(--sp-2) var(--sp-1); background:var(--pp-white); }
+body.lms-body.mock-app .calendar-actions .mock-primary { background:var(--pp-white) !important; color:var(--accent-deep) !important; }
+body.lms-body.mock-app .calendar-board { border-radius:0; }
+body.lms-body.mock-app .calendar-weekdays { background:var(--accent-soft); color:var(--pp-ink); padding:var(--sp-2) 0; }
+body.lms-body.mock-app .calendar-cell { min-height:64px !important; border-top-color:var(--pp-line) !important; padding:var(--sp-1) !important; }
+body.lms-body.mock-app .calendar-number { width:28px; min-height:24px; }
+body.lms-body.mock-app .calendar-cell.outside-month { background:var(--pp-white) !important; color:var(--pp-gray) !important; }
+body.lms-body.mock-app .calendar-cell[aria-pressed=true] { background:var(--accent-soft) !important; }
+body.lms-body.mock-app .calendar-cell[aria-current=date] .calendar-number { border-radius:var(--radius); }
+body.lms-body.mock-app .calendar-markers { gap:2px; min-height:16px; }
+body.lms-body.mock-app .calendar-markers > span { font-size:10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+body.lms-body.mock-app .calendar-markers small { font-size:10px; }
+body.lms-body.mock-app .calendar-legend { margin:var(--sp-2) 0 0; font-size:10px; }
+body.lms-body.mock-app .calendar-day { padding:var(--sp-4); scroll-margin-top:76px; }
+body.lms-body.mock-app .calendar-day h2 { font-size:16px !important; margin-bottom:var(--sp-3) !important; }
+body.lms-body.mock-app .calendar-day h3 { font-size:12px; color:var(--pp-gray); }
+body.lms-body.mock-app .calendar-layout { gap:var(--sp-3); }
+body.lms-body.mock-app .calendar-utilities { background:var(--pp-white); padding:var(--sp-3) var(--sp-4); max-width:none; margin-top:var(--sp-3); }
+body.lms-body.mock-app .calendar-date-jump { border:0; }
+body.lms-body.mock-app .calendar-import-entry { padding:var(--sp-3) 0; border-radius:0; border-top:1px solid var(--pp-line); }
+body.lms-body.mock-app .gallery-tile { border-radius:0; }
+body.lms-body.mock-app .gallery-tile .video-title { font-weight:500; }
+body.lms-body.mock-app .gallery-empty { border-radius:0; padding:var(--sp-6); }
+body.lms-body.mock-app .gallery-empty .empty-video-symbol { width:64px; height:56px; margin-bottom:var(--sp-3); }
+body.lms-body.mock-app .premium-intro { background:var(--pp-white); color:var(--pp-ink); border-radius:0; padding:var(--sp-5); }
+body.lms-body.mock-app .premium-intro h2 { color:var(--pp-ink) !important; font-size:18px !important; }
+body.lms-body.mock-app .premium-intro p { color:var(--pp-gray); font-size:14px; }
+body.lms-body.mock-app .account-list { border-radius:0; }
+body.lms-body.mock-app .guide-heading { margin-bottom:var(--sp-3); }
+body.lms-body.mock-app .guide-topics .mock-control { color:var(--pp-ink) !important; border:0 !important; border-radius:var(--radius) !important; }
+body.lms-body.mock-app .guide-topics .mock-control[aria-pressed=true] { background:var(--pp-white) !important; color:var(--accent-deep) !important; }
+body.lms-body.mock-app #manager-form { border-radius:0; }
+body.lms-body.mock-app .manager-intro { margin-bottom:var(--sp-4); }
+
+@media(max-width:1100px) {
+ body.lms-body.mock-app .home-layout { grid-template-columns:1fr; grid-template-areas:'start' 'agenda' 'tasks' 'goal' 'weekly' 'recent' 'gallery'; gap:var(--sp-3); }
+}
+@media(max-width:860px) {
+ body.lms-body.mock-app .lms-mobile-bar { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; gap:var(--sp-2); height:56px; min-height:56px; padding:0 var(--sp-3) !important; }
+ body.lms-body.mock-app .app-menu-trigger { display:inline-flex !important; padding:0 !important; color:var(--pp-ink) !important; width:44px; }
+ body.lms-body.mock-app .app-menu-trigger .ico { width:22px; height:22px; }
+ body.lms-body.mock-app .desktop-brand,body.lms-body.mock-app .header-person-actions .bar-person { display:none; }
+ body.lms-body.mock-app .mobile-page-title { display:block; font-size:16px; line-height:1.5; font-weight:600; }
+ body.lms-body.mock-app .header-person-actions { display:flex; justify-content:flex-end; }
+ body.lms-body.mock-app main.lms-content { padding:var(--sp-3) var(--sp-3) 108px !important; }
+ body.lms-body.mock-app .page-heading h1 { position:absolute; width:1px; height:1px; padding:0; margin:-1px !important; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+ body.lms-body.mock-app .page-heading { margin:0; }
+ body.lms-body.mock-app .page-heading .muted { margin:var(--sp-1) var(--sp-1) var(--sp-3); font-size:12px; }
+ body.lms-body.mock-app .page-heading .date { padding:0; margin-bottom:var(--sp-2); }
+ body.lms-body.mock-app .home-date-line { margin:calc(-1 * var(--sp-3)) calc(-1 * var(--sp-3)) var(--sp-3); }
+ body.lms-body.mock-app .home-start-options { grid-template-columns:1fr 1fr; gap:0; }
+ body.lms-body.mock-app .home-start-copy strong { font-size:14px; }
+ body.lms-body.mock-app .home-start-option { min-height:100px; padding:var(--sp-3) var(--sp-2); }
+ body.lms-body.mock-app .home-haru { padding:var(--sp-2); }
+ body.lms-body.mock-app .home-haru img { width:44px; height:52px; }
+ body.lms-body.mock-app .home-haru .manager-name { font-size:10px; }
+ body.lms-body.mock-app .home-goal { padding:var(--sp-4); }
+ body.lms-body.mock-app .daily-tabs { margin:0 0 var(--sp-3); }
+ body.lms-body.mock-app .daily-context { padding:0 var(--sp-1); }
+ body.lms-body.mock-app .calendar-cell { min-height:52px !important; }
+ body.lms-body.mock-app .calendar-day { scroll-margin-top:68px; }
+ body.lms-body.mock-app .task-main { padding:var(--sp-4); }
+ body.lms-body.mock-app .osn-tabbar { background:var(--accent) !important; border:0 !important; box-shadow:none !important; }
+ body.lms-body.mock-app .osn-tab { color:var(--pp-ink) !important; gap:2px; font-weight:400; }
+ body.lms-body.mock-app .osn-tab.is-on { color:var(--pp-ink) !important; }
+ body.lms-body.mock-app .osn-tab-ico,body.lms-body.mock-app .osn-tab-write { width:44px; height:28px; border-radius:var(--radius) !important; }
+ body.lms-body.mock-app .osn-tab.is-on .osn-tab-ico,body.lms-body.mock-app .osn-tab.is-on .osn-tab-write { background:var(--accent-soft) !important; }
+ body.lms-body.mock-app .osn-tab .ico { width:22px; height:22px; }
+ body.lms-body.mock-app .osn-tab-label { font-size:10px; }
+ body.lms-body.mock-app .mock-preview { margin-bottom:80px; padding-top:0; }
+ body.lms-body.mock-app[data-page=onboarding] .lms-mobile-bar { grid-template-columns:44px minmax(0,1fr) 44px; }
+ body.lms-body.mock-app[data-page=onboarding] main.lms-content { padding-top:var(--sp-5) !important; }
+ body.lms-body.mock-app .manager-character { width:80px; height:96px; }
+ body.lms-body.mock-app .manager-setup { padding:0 var(--sp-1); }
+}
+
+body.lms-body.mock-app .lms-mobile-bar { background:var(--accent) !important; border:0 !important; }
+body.lms-body.mock-app .entry-tabs.library-tabs { background:var(--accent); border:0; border-radius:0; padding:var(--sp-1); gap:var(--sp-1); margin:0 0 var(--sp-3); }
+body.lms-body.mock-app .entry-tabs.library-tabs a { min-height:44px; border:0; color:var(--pp-ink); font-size:14px; border-radius:var(--radius); padding:var(--sp-2); }
+body.lms-body.mock-app .entry-tabs.library-tabs a[aria-current] { background:var(--pp-white); color:var(--accent-deep); }
+body.lms-body.mock-app.gallery-is-empty #gallery-empty { border-radius:0; padding:var(--sp-6) var(--sp-4); }
+body.lms-body.mock-app.gallery-is-empty #gallery-empty .empty-video-symbol { width:64px; height:56px; margin-bottom:var(--sp-3); }
+body.lms-body.mock-app.gallery-is-empty #gallery-empty h2 { font-size:16px !important; }
+body.lms-body.mock-app .daily-goal,body.lms-body.mock-app .goal-context,body.lms-body.mock-app .comparison-grid { border-radius:0; }
+body.lms-body.mock-app .daily-goal-settings { margin-top:var(--sp-3); }
+@media(max-width:860px) {
+ body.lms-body.mock-app .guide-heading h1 { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); margin:0; }
+ body.lms-body.mock-app .guide-heading { justify-content:flex-end; margin:0; }
+ body.lms-body.mock-app .guide-heading .quiet-link { min-height:44px; display:flex; align-items:center; }
+ body.lms-body.mock-app .mobile-page-title { overflow-wrap:anywhere; }
+}
+body.lms-body.mock-app .home-theme-preview,body.lms-body.mock-app .task-context > section { border-radius:0; }
+body.lms-body.mock-app .task-context > section:first-child { background:transparent; padding:0; }
+body.lms-body.mock-app .home-section-title .quiet-link { min-height:44px; }
+body.lms-body.mock-app .osn-tab-label { font-size:12px; }

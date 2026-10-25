@@ -223,3 +223,12 @@
     if (records.length) { $('.section-heading .count').textContent = `${3 + records.length}件`; $('.section-heading > .small-text').textContent = `動画あり ${2 + records.filter(r => r.attachment || r.start).length}件`; }
   }
 })();
+
+// The compact header keeps secondary destinations in one accessible menu.
+(() => {
+  const menu=document.querySelector('#app-menu');
+  if(!menu)return;
+  document.querySelector('[data-app-menu]')?.addEventListener('click',()=>menu.showModal());
+  menu.querySelector('[data-app-menu-close]').addEventListener('click',()=>menu.close());
+  menu.addEventListener('click',event=>{if(event.target===menu){const r=menu.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)menu.close();}});
+})();

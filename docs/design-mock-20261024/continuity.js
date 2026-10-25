@@ -4,7 +4,7 @@
   const page=document.body.dataset.page;
   // All five tabs keep the same selected day and personal/example data space.
   const navMode=page==='tasks'&&window.osnTasks?window.osnTasks.mode==='demo'?'dribble':'own':window.osnJourney.prefix.includes('season-example')?'dribble':'own';
-  document.querySelectorAll('.side-nav a,.osn-tabbar a').forEach(a=>{
+  document.querySelectorAll('.side-nav a,.osn-tabbar a,.app-menu-nav a').forEach(a=>{
     const name=a.getAttribute('href')?.split('?')[0];
     if(!['home.html','calendar.html','record.html','growth.html','tasks.html'].includes(name))return;
     const query=new URLSearchParams({example:navMode,tasks:navMode==='dribble'?'demo':'own'});
@@ -71,27 +71,34 @@
   $('.mock-preview a').textContent=demo?'自分で試す':'画面一覧';
   $('.mock-preview a').href=demo?page+'.html?example=own&tasks=own':'index.html';
   // Navigation from these integration screens keeps the selected data space explicit.
-  $$('.side-nav a,.osn-tabbar a').forEach(a=>{const name=a.getAttribute('href')?.split('?')[0];if(['home.html','calendar.html','record.html','growth.html','tasks.html'].includes(name))a.href=url(name,name==='home.html'?today:date);});
+  $$('.side-nav a,.osn-tabbar a,.app-menu-nav a').forEach(a=>{const name=a.getAttribute('href')?.split('?')[0];if(['home.html','calendar.html','record.html','growth.html','tasks.html'].includes(name))a.href=url(name,name==='home.html'?today:date);});
   showState();
 
   if(page==='home'){
     const day=days()[date]||{}, r=day.reflection||{};
     const done=Boolean(r.outcome||r.good||r.next);
-    $('#home-date').textContent=`${date===today?'今日 · ':''}${date.slice(0,4)}年 ${label(date)}`;
+    $('#home-date').textContent=`${label(date)}${date===today?' · 今日':''}`;
+    $('.home-section-title h2').textContent=date===today?'今日の記録':'この日の記録';
+    $('.home-start').setAttribute('aria-label',date===today?'今日の記録':'この日の記録');
+    $('.home-agenda h2').textContent=date===today?'今日の予定':'この日の予定';
+    $('.home-task-section h2').textContent=date===today?'今日のタスク':'現在のタスク';
+    $('#home-prev').addEventListener('click',()=>location.href=url('home.html',add(date,-1)));
+    $('#home-next').addEventListener('click',()=>location.href=url('home.html',add(date,1)));
     $('#home-calendar').href=url('calendar.html');$('#home-schedule-link').href=url('calendar.html');
     $('#home-tasks-link').href=url('tasks.html',today)+'#today';
-    $('#home-start-heading').textContent=done?'今日の一歩を、残せたね。':day.intention?'準備OK。練習で試してみよう。':'まずは、今日のテーマを1つ。';
-    $('.home-haru-copy > .muted').textContent=done?'おつかれさま。気づきは次の練習につながります。':day.intention?'今日のテーマを、練習・試合で試してみよう。':'書くのは、ひとことからでOK。';
+    $('#home-start-heading').textContent=done?'今日の記録、おつかれさま。':day.intention?'練習が終わったら、ふりかえろう。':'練習前に、テーマをひとつ決めよう。';
+    if(date!==today)$('#home-start-heading').textContent='日付を選んで、記録を見返せるよ。';
+    $('.home-haru-copy > .muted').textContent=done?'次に試すことも、残しておこう。':day.intention?'できたことを、ひとこと残そう。':'短い言葉で大丈夫。';
     $('#home-daily').innerHTML=`<div class="home-start-options">
-      <a id="home-before" class="home-start-option ${!day.intention&&!done?'is-next':''}" href="${h(url('record.html'))}"><span class="home-action-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m15 9 6-6m-3 0h3v3"/></svg></span><span class="home-start-copy"><span class="home-start-time">${day.intention?'テーマは保存済み':'これから練習・試合'}</span><strong>${day.intention?'今日のテーマを見直す':'今日のテーマを決める'}</strong><span class="home-start-help">${day.intention?'決めたことを確認・変更できます':'意識したいことを、1つだけ。'}</span></span>${arrow}</a>
-      <a id="home-after" class="home-start-option ${day.intention&&!done?'is-next':''}" href="${h(url('reflection.html'))}"><span class="home-action-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h11l3 3v15H5ZM15 3v5h4M8 12h8m-8 4h5"/></svg></span><span class="home-start-copy"><span class="home-start-time">${done?'ふりかえりは保存済み':'練習・試合が終わった'}</span><strong>${done?'ふりかえりを見直す':'ふりかえりを書く'}</strong><span class="home-start-help">${done?'あとから書き足しても大丈夫':'テーマを決めていなくても書けます。'}</span></span>${arrow}</a>
-      </div>${day.intention?`<div class="home-theme-preview"><span class="small-text">今日のテーマ</span><p data-user-content>${h(day.intention)}</p></div>`:''}${done?`<a class="row-link" href="${h(url('day.html'))}"><strong>今日の記録を見る</strong>${arrow}</a>`:''}`;
-    $('#home-schedule').innerHTML=events(date).map(e=>`<a class="continuity-row" href="${h(url('calendar.html'))}"><span class="continuity-time">${h(e.time?(e.time+(e.endTime?'–'+e.endTime:'')):'時刻未定')}</span><span class="continuity-row-copy"><strong>${h(e.title||types[e.type])}</strong><small>${types[e.type]}</small></span>${arrow}</a>`).join('')||empty('今日は予定がありません。自分のペースで過ごそう。');
-    const due=openTasks().filter(t=>t.due&&t.due<=date).sort((a,b)=>a.due.localeCompare(b.due)||Number(b.important)-Number(a.important));
+      <a id="home-before" class="home-start-option ${!day.intention&&!done?'is-next':''}" href="${h(url('record.html'))}"><span class="home-action-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m15 9 6-6m-3 0h3v3"/></svg></span><span class="home-start-copy"><span class="home-start-time">${day.intention?'保存済み':'練習前'}</span><strong>${day.intention?'テーマを見直す':'テーマを決める'}</strong><span class="home-start-help">${day.intention?'内容を確認・変更':'意識することを1つ'}</span></span>${arrow}</a>
+      <a id="home-after" class="home-start-option ${day.intention&&!done?'is-next':''}" href="${h(url('reflection.html'))}"><span class="home-action-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h11l3 3v15H5ZM15 3v5h4M8 12h8m-8 4h5"/></svg></span><span class="home-start-copy"><span class="home-start-time">${done?'保存済み':'練習後'}</span><strong>${done?'ふりかえりを見直す':'ふりかえりを書く'}</strong><span class="home-start-help">${done?'内容を確認・変更':'できたこと・次の一歩'}</span></span>${arrow}</a>
+      </div>${day.intention?`<div class="home-theme-preview"><span class="small-text">${date===today?'今日のテーマ':'この日のテーマ'}</span><p data-user-content>${h(day.intention)}</p></div>`:''}${done?`<a class="row-link" href="${h(url('day.html'))}"><strong>${date===today?'今日の記録を見る':'この日の記録を見る'}</strong>${arrow}</a>`:''}`;
+    $('#home-schedule').innerHTML=events(date).map(e=>`<a class="continuity-row" href="${h(url('calendar.html'))}"><span class="continuity-time">${h(e.time?(e.time+(e.endTime?'–'+e.endTime:'')):'時刻未定')}</span><span class="continuity-row-copy"><strong>${h(e.title||types[e.type])}</strong><small>${types[e.type]}</small></span>${arrow}</a>`).join('')||empty('予定はありません。');
+    const due=openTasks().filter(t=>t.due&&t.due<=today).sort((a,b)=>a.due.localeCompare(b.due)||Number(b.important)-Number(a.important));
     $('#home-tasks').innerHTML=(taskRows(due.slice(0,3))||empty('今日までのタスクはありません。'))+(due.length>3?`<div class="continuity-empty">${link('tasks.html',today,`ほか${due.length-3}件を見る`)}</div>`:'');
     const week=monday(date), review=read('weekly-reviews-v1',{})[week];
     $('#home-weekly').href=url('weekly.html',date);$('#home-week-label').textContent=`${label(week)}〜${label(add(week,6))}${review?' · 保存済み':''}`;
-    $('#home-recent').innerHTML=renderNoteRows(entries().filter(e=>e.date<=date).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,2))||empty('まだノートがありません。短い一言から始められます。');
+    $('#home-recent').innerHTML=renderNoteRows(entries().filter(e=>e.date<=date).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,2))||empty('まだノートがありません。');
   }
 
   if(page==='calendar'){
@@ -102,7 +109,7 @@
     function summary(d){const ev=events(d), ts=tasksOn(d).filter(t=>t.status!=='done');return [ev.length?ev.map(s=>types[s.type]).join('・'):'',ts.length?`期限${ts.length}`:'',notesOn(d)?'記録':''].filter(Boolean);}
     function render(){
       put('selected-date',date);
-      $$('.side-nav a,.osn-tabbar a').forEach(a=>{const name=a.getAttribute('href')?.split('?')[0];if(['calendar.html','record.html','growth.html','tasks.html'].includes(name))a.href=url(name);});
+      $$('.side-nav a,.osn-tabbar a,.app-menu-nav a').forEach(a=>{const name=a.getAttribute('href')?.split('?')[0];if(['calendar.html','record.html','growth.html','tasks.html'].includes(name))a.href=url(name);});
       $('#calendar-date').value=date;$('#calendar-day-title').textContent=`${label(date)}${date===today?' · 今日':''}`;
       $('#calendar-label').textContent=view==='month'?`${month.slice(0,4)}年${Number(month.slice(5))}月`:`${label(monday(date))}〜${label(add(monday(date),6))}`;
       $$('[data-calendar-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.calendarView===view)));
