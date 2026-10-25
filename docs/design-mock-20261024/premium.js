@@ -74,7 +74,7 @@
     const list=filtered();$('#gallery-count').textContent=`${list.length}本${selected.length?` · 選択中 ${selected.length}本`:''}`;
     $('#gallery-grid').innerHTML=list.map(c=>`<article class="gallery-tile">${thumb(c,true)}<label class="video-select"><input type="checkbox" data-select="${h(c.id)}" aria-label="${h(c.title)}を選択" ${selected.includes(c.id)?'checked':''}>${h(c.type)} <span class="small-text">★${c.rating}</span></label><p>${h(c.date.replaceAll('-','/'))}</p><a href="#clip-${h(c.id)}" data-preview="${h(c.id)}" class="video-title">${h(c.title)}</a><p>${h(c.match)}</p><div class="video-meta"><span class="small-text">${eligible(c)?'書き出し可':c.source==='upload'?'元動画を再追加':'リンクのみ'}</span>${button(favorites.includes(c.id)?'★':'☆',`data-favorite="${h(c.id)}" aria-label="${h(c.title)}をお気に入り${favorites.includes(c.id)?'から外す':'に追加'}" aria-pressed="${favorites.includes(c.id)}"`,'favorite')}</div></article>`).join('');
     show($('#gallery-empty'),!list.length);
-    $('#gallery-empty').innerHTML=clips.length?'<h2>該当する動画がありません</h2><p>検索する言葉や、絞り込みを変えてみてください。</p>':'<h2>プレー動画を、ここに集めよう</h2><p>プレーの記録に動画をつけると、この一覧に並びます。</p><a href="gallery.html?example=dribble&amp;videos=demo">春から秋の動画で試す →</a>';
+    $('#gallery-empty').innerHTML=clips.length?'<h2>該当する動画がありません</h2><p>検索する言葉や、絞り込みを変えてみてください。</p>':'<h2>プレー動画を、ここに集めよう</h2><p>プレーの記録に動画をつけると、この一覧に並びます。</p><a class="mock-control mock-secondary" href="guide.html?topic=video&amp;step=1" data-haru-help>ハルに動画の使い方を聞く</a>';
     selectionUI();
   }
   function openPreview(id){

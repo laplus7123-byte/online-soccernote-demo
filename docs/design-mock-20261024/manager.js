@@ -65,7 +65,7 @@
     const messages=['はじめまして！あなたの目標に向かう準備を、一緒にしよう。','まずは、なりたい自分を言葉にしてみよう。','目標につながるプレーを、1つ選んでみよう。','準備ができたね。毎日の小さな挑戦を残していこう。'];
     $('#manager-message').textContent=t(messages[step]);
     $('[data-manager-back]').hidden=step===0;
-    $('#manager-next').textContent=t(step===3?'この内容で始める':step===2?'内容を確認する':'次へ');
+    $('#manager-next').textContent=t(step===3?'使い方を見て始める':step===2?'内容を確認する':'次へ');
     const d=data();reviewValue('#manager-review-name',d.nickname);reviewValue('#manager-review-goal',d.goal);reviewValue('#manager-review-focus',d.focus);choices();
     if (focus) $(`[data-manager-step="${step}"] h1`).focus();
   }
@@ -84,7 +84,7 @@
       failOnce=false;$('#manager-error').textContent=t('設定を保存できませんでした。入力は残っています。もう一度お試しください。');$('#manager-error').hidden=false;return;
     }
     if(status==='complete'){try{sessionStorage.removeItem(journey.prefix+'manager-draft-v1');}catch{}}
-    location.href=homeUrl;
+    location.href=status==='complete'&&!params.has('edit')?'guide.html?example=own&tasks=own&date=2026-10-25':homeUrl;
   }
   form.addEventListener('input',()=>{choices();draft();$('#manager-error').hidden=true;});
   form.addEventListener('submit',e=>{e.preventDefault();if(!validate())return;$('#manager-error').hidden=true;if(step===3){finish('complete');return;}step++;draft();render(true);});

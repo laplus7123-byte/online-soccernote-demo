@@ -1014,3 +1014,45 @@ html:not([lang=ja]) body.lms-body.mock-app .task-tools { flex-wrap:wrap; }
  html[lang=en] body.lms-body.mock-app .task-views { gap:0; }
  html[lang=en] body.lms-body.mock-app .task-views a { padding:var(--sp-2); }
 }
+
+/* Haru's short, skippable usage guide. */
+body.lms-body.mock-app[data-page="guide"] .lms-content { max-width:760px; }
+body.lms-body.mock-app .haru-guide { max-width:640px; margin:0 auto; }
+body.lms-body.mock-app .guide-heading { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3); margin-bottom:var(--sp-4); }
+body.lms-body.mock-app .guide-heading h1 { font-size:20px; margin:0; }
+body.lms-body.mock-app .guide-heading a { flex:none; font-size:12px; min-height:44px; display:flex; align-items:center; }
+body.lms-body.mock-app .guide-topics { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--pp-line-strong); }
+body.lms-body.mock-app .guide-topics .mock-control { background:transparent; border-radius:0; border:0; border-bottom:2px solid transparent; min-height:48px; color:var(--pp-gray); }
+body.lms-body.mock-app .guide-topics [aria-pressed="true"] { color:var(--accent-deep); border-bottom-color:var(--accent-deep); }
+body.lms-body.mock-app .guide-progress { display:flex; gap:var(--sp-2); margin:var(--sp-3) 0; }
+body.lms-body.mock-app .guide-progress .mock-control { flex:1; min-width:0; white-space:normal; font-size:12px; line-height:1.5; padding:var(--sp-2); background:transparent; color:var(--pp-gray); }
+body.lms-body.mock-app .guide-progress [aria-current] { background:var(--accent-soft); color:var(--accent-deep); }
+body.lms-body.mock-app .guide-panel .manager-intro { align-items:center; margin:0 0 var(--sp-4); }
+body.lms-body.mock-app .guide-speech { font-size:16px; line-height:1.75; margin:0; }
+body.lms-body.mock-app .guide-panel h2 { font-size:18px; margin:var(--sp-4) 0; }
+body.lms-body.mock-app .guide-example { padding:var(--sp-4); background:var(--pp-white); border-radius:var(--radius); }
+body.lms-body.mock-app .guide-example p { font-size:16px; line-height:1.75; margin:var(--sp-2) 0 0; }
+body.lms-body.mock-app .guide-hint { font-size:14px; line-height:1.75; margin:var(--sp-4) 0; }
+body.lms-body.mock-app .guide-controls { display:flex; justify-content:space-between; gap:var(--sp-3); margin-top:var(--sp-5); border-top:1px solid var(--pp-line); padding-top:var(--sp-4); }
+body.lms-body.mock-app .guide-controls .mock-control { min-width:0; font-size:14px; white-space:normal; padding:var(--sp-3); height:auto; }
+body.lms-body.mock-app .guide-controls [data-guide-back] { background:transparent; color:var(--pp-gray); }
+body.lms-body.mock-app .guide-footer { margin-top:var(--sp-4); }
+body.lms-body.mock-app .guide-sample { margin-top:var(--sp-4); }
+body.lms-body.mock-app .guide-sample summary { min-height:44px; align-content:center; cursor:pointer; color:var(--accent-deep); font-size:14px; }
+body.lms-body.mock-app .guide-sample p,.guide-demo-note { font-size:12px; line-height:1.75; margin:var(--sp-3) 0; }
+body.lms-body.mock-app .manager-guide-entry { margin-top:var(--sp-2); padding:var(--sp-2) 0; }
+@media(max-width:767px) {
+ body.lms-body.mock-app .guide-panel .manager-character { width:104px; height:116px; }
+ body.lms-body.mock-app .guide-speech { font-size:14px; }
+ body.lms-body.mock-app .guide-panel h2 { font-size:18px; }
+}
+body.lms-body.mock-app .guide-topics .mock-control { border-bottom:2px solid transparent !important; color:var(--pp-gray) !important; }
+body.lms-body.mock-app .guide-topics [aria-pressed="true"] { border-bottom-color:var(--accent-deep) !important; color:var(--accent-deep) !important; }
+body.lms-body.mock-app .guide-progress .mock-control { color:var(--pp-gray) !important; }
+body.lms-body.mock-app .guide-progress [aria-current] { background:var(--accent-soft) !important; color:var(--accent-deep) !important; }
+@media(max-width:767px) {
+ body.lms-body.mock-app .guide-panel h2,body.lms-body.mock-app .guide-hint { margin:var(--sp-3) 0; }
+}
+@media(max-width:767px) {
+ body.lms-body.mock-app .guide-controls { margin-top:var(--sp-3); padding-top:var(--sp-3); }
+}
