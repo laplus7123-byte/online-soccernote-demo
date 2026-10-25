@@ -1,5 +1,51 @@
 /* Phase 1 static prototype. Load AFTER the four existing stylesheets.
    No new color, shadow, radius or spacing tokens. Production files stay untouched. */
+body.lms-body.mock-app[data-page="onboarding"] .lms-side,
+body.lms-body.mock-app[data-page="onboarding"] .osn-tabbar,
+body.lms-body.mock-app[data-page="onboarding"] .account-profile-link { display:none; }
+body.lms-body.mock-app[data-page="onboarding"] .lms-content { max-width:720px; margin:0 auto; padding-bottom:var(--sp-8); }
+body.lms-body.mock-app .manager-intro { display:flex; align-items:center; gap:var(--sp-5); margin-bottom:var(--sp-5); }
+body.lms-body.mock-app .manager-character { width:144px; height:144px; object-fit:contain; flex:none; }
+body.lms-body.mock-app .manager-name { color:var(--accent-deep); font-size:12px; font-weight:700; margin-bottom:var(--sp-2); }
+body.lms-body.mock-app #manager-message { font-size:16px; line-height:1.75; }
+body.lms-body.mock-app .manager-progress { display:flex; justify-content:space-between; gap:var(--sp-3); padding:0; margin:0 0 var(--sp-5); list-style:none; }
+body.lms-body.mock-app .manager-progress li { display:flex; align-items:center; gap:var(--sp-2); color:var(--pp-gray); font-size:14px; }
+body.lms-body.mock-app .manager-progress li > span { display:flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--pp-white); border-radius:var(--radius); font-size:12px; }
+body.lms-body.mock-app .manager-progress li[aria-current] { color:var(--accent-deep); font-weight:700; }
+body.lms-body.mock-app .manager-progress li[aria-current] > span { background:var(--accent-deep); color:var(--pp-white); }
+body.lms-body.mock-app .manager-progress li.is-complete > span { background:var(--accent-soft); color:var(--accent-deep); }
+body.lms-body.mock-app #manager-form { padding:var(--sp-6); background:var(--pp-white); border-radius:var(--radius); }
+body.lms-body.mock-app #manager-form h1 { font-size:20px; margin:0 0 var(--sp-2); }
+body.lms-body.mock-app .manager-input { margin:var(--sp-5) 0 var(--sp-2); }
+body.lms-body.mock-app .manager-choices { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); margin-top:var(--sp-4); }
+body.lms-body.mock-app .manager-choices .mock-control { padding:var(--sp-3); min-height:48px; height:auto; white-space:normal; font-size:14px; line-height:1.5; border:1px solid var(--pp-line-strong); }
+body.lms-body.mock-app .manager-choices [aria-pressed="true"] { background:var(--accent-soft); color:var(--accent-deep); border-color:var(--accent-deep); }
+body.lms-body.mock-app .manager-actions { display:flex; gap:var(--sp-3); margin-top:var(--sp-6); }
+body.lms-body.mock-app #manager-next { flex:1; }
+body.lms-body.mock-app #manager-draft-status { margin-top:var(--sp-3); }
+body.lms-body.mock-app .manager-later { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--sp-3); margin-top:var(--sp-4); }
+body.lms-body.mock-app .manager-later .mock-control { border:0; background:transparent; color:var(--pp-gray); }
+body.lms-body.mock-app .manager-later .quiet-link { font-size:12px; min-height:44px; display:flex; align-items:center; }
+body.lms-body.mock-app .manager-demo-note { margin-top:var(--sp-4); }
+body.lms-body.mock-app .manager-summary { margin:var(--sp-5) 0; }
+body.lms-body.mock-app .manager-summary > div { padding:var(--sp-3) 0; border-bottom:1px solid var(--pp-line); }
+body.lms-body.mock-app .manager-summary dt { font-size:12px; color:var(--pp-gray); margin-bottom:var(--sp-1); }
+body.lms-body.mock-app .manager-summary dd { margin:0; font-size:16px; overflow-wrap:anywhere; }
+body.lms-body.mock-app .manager-next-hint { font-size:14px; }
+body.lms-body.mock-app .manager-home-link { display:flex; align-items:center; gap:var(--sp-3); margin-top:var(--sp-4); padding:var(--sp-3) 0; color:var(--pp-ink); }
+body.lms-body.mock-app .manager-home-link img { object-fit:contain; flex:none; }
+body.lms-body.mock-app .manager-home-link > span:nth-child(2) { flex:1; }
+body.lms-body.mock-app .manager-home-link strong,.manager-home-link small { display:block; }
+body.lms-body.mock-app .manager-home-link strong { font-size:14px; }
+body.lms-body.mock-app .manager-home-link small { font-size:12px; color:var(--pp-gray); margin-top:var(--sp-1); }
+@media(max-width:767px) {
+  body.lms-body.mock-app .manager-character { width:96px; height:108px; }
+  body.lms-body.mock-app .manager-intro { gap:var(--sp-3); margin-bottom:var(--sp-4); }
+  body.lms-body.mock-app #manager-message { font-size:14px; }
+  body.lms-body.mock-app #manager-form { padding:var(--sp-4); }
+  body.lms-body.mock-app .manager-progress { gap:var(--sp-2); }
+  body.lms-body.mock-app .manager-progress li { font-size:12px; }
+}
 body.lms-body.mock-app { margin:0; padding:0 !important; font-family:"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN",Arial,"Noto Sans JP",Meiryo,sans-serif; background:var(--pp-base); color:var(--pp-ink); line-height:1.5; }
 body.lms-body.mock-app *, body.lms-body.mock-app *::before, body.lms-body.mock-app *::after { box-sizing:border-box; }
 body.lms-body.mock-app [hidden] { display:none !important; }

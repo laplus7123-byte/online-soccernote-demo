@@ -74,7 +74,7 @@
     if (!profile().goal) $('.goal-editor').open=true;
     const saveGoal = event => {
       event.preventDefault(); if (!goalForm.reportValidity()) return;
-      const data={goal:goalForm.elements.goal.value.trim(),focus:goalForm.elements.focus.value.trim()};
+      const data={...profile(),goal:goalForm.elements.goal.value.trim(),focus:goalForm.elements.focus.value.trim()};
       if (!data.goal) { goalForm.elements.goal.setCustomValidity('目指すことを書いてください。'); goalForm.reportValidity(); return; }
       if (!write('profile',data)) { $('#goal-status').textContent='保存できませんでした。入力を残しています。もう一度お試しください。'; return; }
       $$('[data-goal-title]').forEach(el=>el.textContent=data.goal); $$('[data-focus-title]').forEach(el=>el.textContent=data.focus || 'まだ決めていません');
