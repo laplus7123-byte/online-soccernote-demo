@@ -21,14 +21,9 @@
   const pages=['home','calendar','tasks','growth','intention','intention-ready','reflection','reflection-ready','day','intention-saved','reflection-saved','record','record-ready','video','watch','watch-record','gallery','video-export','export-status','exports','premium','settings','onboarding'];
   if(pages.includes(page)){
     const link=$('.mock-preview a');
-    if(link){link.href=helpUrl;link.textContent=t('ハルに使い方を聞く');}
+    if(link){link.href=helpUrl;link.textContent='ハルに使い方を聞く';}
   }
   $$('[data-haru-help]').forEach(a=>a.href=helpUrl);
-  if(page==='home'){
-    const entry=document.createElement('a');entry.className='manager-home-link manager-guide-entry';entry.href=helpUrl;
-    entry.innerHTML='<img src="manager-haru.png" alt="" width="56" height="56"><span><strong>ハルに使い方を聞く</strong><small>練習前・練習後にすることを案内するよ</small></span><span aria-hidden="true">›</span>';
-    $('.home-start')?.append(entry);
-  }
   if(page==='gallery'){
     // Empty results are rendered again when filters change. Keep their help links in context.
     const updateHelp=()=>$$('#gallery-empty [data-haru-help]').forEach(a=>a.href=helpUrl);
@@ -66,7 +61,7 @@
   $('[data-guide-back]').addEventListener('click',()=>{currentStep=Math.max(0,currentStep-1);render(true);});
   $('[data-guide-next]').addEventListener('click',()=>{currentStep=Math.min(2,currentStep+1);render(true);});
   document.addEventListener('osn-languagechange',()=>render());
-  $('.mock-preview span').textContent=t(demo?'15歳の選手のサンプル · 架空の記録':'操作デモ · このタブ内だけに保存');
-  $('.mock-preview a').href=url('home.html');$('.mock-preview a').textContent=t('ホームへ');
+  $('.mock-preview span').textContent=demo?'15歳の選手のサンプル · 架空の記録':'操作デモ · このタブ内だけに保存';
+  $('.mock-preview a').href=url('home.html');$('.mock-preview a').textContent='ホームへ';
   render();
 })();

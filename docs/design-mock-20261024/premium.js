@@ -48,11 +48,12 @@
   function gate(next){write('after-plan',next);location.href='premium.html';}
   function selectionUI(){
     const picked=selected.map(clipById), available=picked.filter(eligible);
+    document.body.classList.toggle('video-selection-active',picked.length>0);
     const exportButton=$('[data-open-export]'); if(!exportButton)return;
     exportButton.disabled=!available.length;
     exportButton.textContent=available.length?`${available.length}本を書き出す`:'動画を選んで書き出す';
     $('#dock-copy').textContent=!picked.length?'保存したい動画にチェック':available.length===picked.length?`${picked.length}本選択 · 1本のMP4にまとめます`:`${picked.length}本選択 · ${picked.length-available.length}本は書き出し対象外`;
-    $('[data-clear-selection]').disabled=!selected.length;$('[data-open-collection]').disabled=!selected.length;
+    $('[data-clear-selection]').disabled=!selected.length;$('[data-clear-selection]').hidden=!selected.length;$('[data-open-collection]').disabled=!selected.length;
   }
   const filterIDs=['video-search','collection-filter','type-filter','source-filter','from-filter','to-filter','rating-filter','sort-filter'];
   function filtered(){
@@ -71,10 +72,11 @@
     filter.innerHTML='<option value="">すべての動画</option><option value="favorites">お気に入り</option>'+collections.map(c=>`<option value="${h(c.id)}">${h(c.name)}</option>`).join('');filter.value=value;
   }
   function renderGallery(){
+    document.body.classList.toggle('gallery-is-empty',!clips.length);
     const list=filtered();$('#gallery-count').textContent=`${list.length}本${selected.length?` · 選択中 ${selected.length}本`:''}`;
     $('#gallery-grid').innerHTML=list.map(c=>`<article class="gallery-tile">${thumb(c,true)}<label class="video-select"><input type="checkbox" data-select="${h(c.id)}" aria-label="${h(c.title)}を選択" ${selected.includes(c.id)?'checked':''}>${h(c.type)} <span class="small-text">★${c.rating}</span></label><p>${h(c.date.replaceAll('-','/'))}</p><a href="#clip-${h(c.id)}" data-preview="${h(c.id)}" class="video-title">${h(c.title)}</a><p>${h(c.match)}</p><div class="video-meta"><span class="small-text">${eligible(c)?'書き出し可':c.source==='upload'?'元動画を再追加':'リンクのみ'}</span>${button(favorites.includes(c.id)?'★':'☆',`data-favorite="${h(c.id)}" aria-label="${h(c.title)}をお気に入り${favorites.includes(c.id)?'から外す':'に追加'}" aria-pressed="${favorites.includes(c.id)}"`,'favorite')}</div></article>`).join('');
     show($('#gallery-empty'),!list.length);
-    $('#gallery-empty').innerHTML=clips.length?'<h2>該当する動画がありません</h2><p>検索する言葉や、絞り込みを変えてみてください。</p>':'<h2>プレー動画を、ここに集めよう</h2><p>プレーの記録に動画をつけると、この一覧に並びます。</p><a class="mock-control mock-secondary" href="guide.html?topic=video&amp;step=1" data-haru-help>ハルに動画の使い方を聞く</a>';
+    $('#gallery-empty').innerHTML=clips.length?'<h2>該当する動画がありません</h2><p>検索する言葉や、絞り込みを変えてみてください。</p>':'<svg class="empty-video-symbol" viewBox="0 0 104 80" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="12" y="8" width="64" height="48" rx="8"/><rect x="28" y="24" width="64" height="48" rx="8" fill="var(--pp-white)"/><path d="m54 38 16 10-16 10Z" fill="var(--accent-soft)"/></svg><span class="small-text">自分のプレーを、見返せる形に</span><h2>最初の動画を残そう</h2><p>プレーの記録に動画をつけると、<br>ここに集まります。</p><a class="mock-control mock-primary" href="play-record.html?new=1">動画を追加する</a><a class="quiet-link" href="guide.html?topic=video&amp;step=1" data-haru-help>ハルに動画の使い方を聞く</a>';
     selectionUI();
   }
   function openPreview(id){

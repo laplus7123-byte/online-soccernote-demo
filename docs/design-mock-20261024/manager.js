@@ -25,10 +25,10 @@
   applyNickname();
   document.addEventListener('osn-languagechange', applyNickname);
   if (page === 'home') {
-    const entry = document.createElement('a'); entry.className='manager-home-link'; entry.href=setupUrl;
-    entry.innerHTML='<img src="manager-haru.png" alt="" width="64" height="64"><span><strong></strong><small></small></span><span aria-hidden="true">›</span>';
+    const entry = document.createElement('a'); entry.className='manager-home-link manager-profile-link'; entry.href=setupUrl;
+    entry.innerHTML='<span class="manager-profile-copy"><strong></strong><small></small></span><span aria-hidden="true">›</span>';
     entry.querySelector('strong').textContent=demo?'ハルと、自分の目標を決める':profile().setupStatus==='complete'?'ハルと設定を見直す':'ハルと初回設定をする';
-    entry.querySelector('small').textContent='呼び名・目標・伸ばしたいプレー';
+    entry.querySelector('small').textContent='目標は、いつでも見直せます。';
     $('.home-goal')?.append(entry);
   }
   $$('[data-manager-settings]').forEach(a => a.href=setupUrl);

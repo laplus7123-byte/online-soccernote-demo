@@ -37,7 +37,7 @@
   function apply(){
     queued=false;observer?.disconnect();document.documentElement.lang=locale;
     const placeholders=new Set(defaults.flatMap(s=>[s,...languages.map(l=>window.osnLocaleCatalog?.[l]?.[s]).filter(Boolean)]));
-    document.querySelectorAll(userSelectors).forEach(el=>{if(!placeholders.has(el.textContent.trim()))el.setAttribute('data-user-content','');});
+    document.querySelectorAll(userSelectors).forEach(el=>{if(el.textContent.trim()&&!placeholders.has(el.textContent.trim()))el.setAttribute('data-user-content','');});
     document.querySelectorAll('option:not([value])').forEach(el=>el.setAttribute('value',el.textContent));
     const walker=document.createTreeWalker(document.documentElement,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode())translateText(node);
     document.querySelectorAll('[placeholder],[aria-label],[title],[alt]').forEach(el=>{
