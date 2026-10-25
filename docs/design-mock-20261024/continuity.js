@@ -46,6 +46,7 @@
     ]:[];
     put('schedules-v1',schedules);
   }
+  document.querySelectorAll('.side-brand,.bar-title,.breadcrumb a[href="home.html"],.status-panel a[href="home.html"]').forEach(a=>a.href=url('home.html',page==='home'?date:journey.date));
   if(!['home','calendar','weekly'].includes(page))return;
   const events=d=>schedules.filter(s=>s.date===d).sort((a,b)=>(a.time||'99').localeCompare(b.time||'99'));
   const taskRows=list=>list.map(t=>`<a class="continuity-row ${t.status==='done'?'is-complete':''}" href="${h(url('tasks.html',date,{task_id:t.id}))}"><span class="continuity-row-copy"><strong>${h(t.title)}</strong><small>${h(t.due?label(t.due)+'まで':'期限なし')}${t.status==='done'?' · 完了':t.due<today?' · 期限を過ぎています':''}${t.owner==='coach'?' · コーチから':''}</small></span>${arrow}</a>`).join('');
@@ -75,15 +76,16 @@
 
   if(page==='home'){
     const day=days()[date]||{}, r=day.reflection||{};
-    const done=Boolean(r.outcome||r.good);
+    const done=Boolean(r.outcome||r.good||r.next);
     $('#home-date').textContent=`${date===today?'今日 · ':''}${date.slice(0,4)}年 ${label(date)}`;
     $('#home-calendar').href=url('calendar.html');$('#home-schedule-link').href=url('calendar.html');
     $('#home-tasks-link').href=url('tasks.html',today)+'#today';
-    let title,copy,action,file;
-    if(done){title='残した気づきを、次の一歩へ';copy=r.next||'今日の記録を残せました。少し前の自分と比べてみよう。';action='この日の記録を見る';file='day.html';}
-    else if(day.intention){title='終わったら、今日をふりかえろう';copy=day.intention;action='ふりかえりを書く';file='reflection.html';}
-    else {title='今日は、何を試す？';copy='始める前に、意識したいことを一つだけ。';action='今日のテーマを決める';file='record.html';}
-    $('#home-daily').innerHTML=`<div class="home-next"><span class="small-text">${done?'記録済み':day.intention?'今日のテーマ':'今日のノート'}</span><h2>${title}</h2><p ${done?r.next?'data-user-content':'':day.intention?'data-user-content':''}>${h(copy)}</p><div class="home-note-actions"><a class="mock-control mock-primary" href="${h(url(file))}">${action}</a>${link(done?'record.html':day.intention?'record.html':'reflection.html',date,done||day.intention?'テーマを見直す':'ふりかえりから書く')}</div></div>`;
+    $('#home-start-heading').textContent=done?'今日の記録を残せました':day.intention?'準備OK。終わったら、ふりかえろう':'今のタイミングを選ぼう';
+    $('.home-start > .muted').textContent=done?'おつかれさま。気づきは次の練習につながります。':day.intention?'今日のテーマを、練習・試合で試してみよう。':'書くのは、ひとことからでOK。';
+    $('#home-daily').innerHTML=`<div class="home-start-options">
+      <a id="home-before" class="home-start-option ${!day.intention&&!done?'is-next':''}" href="${h(url('record.html'))}"><span class="home-start-copy"><span class="home-start-time">${day.intention?'テーマは保存済み':'これから練習・試合'}</span><strong>${day.intention?'今日のテーマを見直す':'今日のテーマを決める'}</strong><span class="home-start-help">${day.intention?'決めたことを確認・変更できます':'意識したいことを、1つだけ。'}</span></span>${arrow}</a>
+      <a id="home-after" class="home-start-option ${day.intention&&!done?'is-next':''}" href="${h(url('reflection.html'))}"><span class="home-start-copy"><span class="home-start-time">${done?'ふりかえりは保存済み':'練習・試合が終わった'}</span><strong>${done?'ふりかえりを見直す':'ふりかえりを書く'}</strong><span class="home-start-help">${done?'あとから書き足しても大丈夫':'テーマを決めていなくても書けます。'}</span></span>${arrow}</a>
+      </div>${day.intention?`<div class="home-theme-preview"><span class="small-text">今日のテーマ</span><p data-user-content>${h(day.intention)}</p></div>`:''}${done?`<a class="row-link" href="${h(url('day.html'))}"><strong>今日の記録を見る</strong>${arrow}</a>`:''}`;
     $('#home-schedule').innerHTML=events(date).map(e=>`<a class="continuity-row" href="${h(url('calendar.html'))}"><span class="continuity-time">${h(e.time?(e.time+(e.endTime?'–'+e.endTime:'')):'時刻未定')}</span><span class="continuity-row-copy"><strong>${h(e.title||types[e.type])}</strong><small>${types[e.type]}</small></span>${arrow}</a>`).join('')||empty('今日は予定がありません。自分のペースで過ごそう。');
     const due=openTasks().filter(t=>t.due&&t.due<=date).sort((a,b)=>a.due.localeCompare(b.due)||Number(b.important)-Number(a.important));
     $('#home-tasks').innerHTML=(taskRows(due.slice(0,3))||empty('今日までのタスクはありません。'))+(due.length>3?`<div class="continuity-empty">${link('tasks.html',today,`ほか${due.length-3}件を見る`)}</div>`:'');

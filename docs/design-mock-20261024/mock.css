@@ -778,7 +778,31 @@ body.lms-body.mock-app div.task-open { padding:var(--sp-2); grid-column:1 / 3; }
 /* Home, calendar and weekly review: integration with the existing five tabs. */
 body.lms-body.mock-app .home-date-line { display:flex; justify-content:space-between; align-items:center; gap:var(--sp-4); margin-bottom:var(--sp-4); }
 body.lms-body.mock-app .home-date-line p { font-weight:700; }
-body.lms-body.mock-app .home-focus > h2 { margin:var(--sp-2) 0 !important; }
+body.lms-body.mock-app .home-goal { margin-top:var(--sp-6); }
+body.lms-body.mock-app .home-goal h2 { font-size:14px; margin:var(--sp-1) 0 !important; }
+body.lms-body.mock-app .home-start > h2 { font-size:20px; margin:0 0 var(--sp-2); }
+body.lms-body.mock-app .home-start-options { display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); margin-top:var(--sp-4); }
+body.lms-body.mock-app .home-start-option { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3); padding:var(--sp-5); border-radius:var(--radius); background:var(--pp-white); color:var(--pp-ink); min-height:132px; }
+body.lms-body.mock-app .home-start-copy { display:flex; flex-direction:column; gap:var(--sp-1); }
+body.lms-body.mock-app .home-start-copy strong { font-size:18px; }
+body.lms-body.mock-app .home-start-time { font-size:12px; color:var(--pp-gray); }
+body.lms-body.mock-app .home-start-help { font-size:14px; }
+body.lms-body.mock-app .home-start-option.is-next { background:var(--accent-deep); color:var(--pp-white); }
+body.lms-body.mock-app .home-start-option.is-next .home-start-time { color:inherit; }
+body.lms-body.mock-app .home-start-option:hover { background:var(--accent-soft); color:var(--pp-ink); }
+body.lms-body.mock-app .home-start-option:hover .home-start-time { color:inherit; }
+body.lms-body.mock-app .home-theme-preview { margin-top:var(--sp-4); padding:var(--sp-4) 0; }
+body.lms-body.mock-app .home-theme-preview p { margin-top:var(--sp-1); overflow-wrap:anywhere; }
+body.lms-body.mock-app .daily-context { margin-bottom:var(--sp-4); }
+body.lms-body.mock-app .daily-context > summary { display:flex; justify-content:space-between; align-items:center; gap:var(--sp-3); min-height:44px; cursor:pointer; list-style:none; }
+body.lms-body.mock-app .daily-context > summary::-webkit-details-marker { display:none; }
+body.lms-body.mock-app .daily-context .day-controls { margin:var(--sp-3) 0; }
+body.lms-body.mock-app .daily-goal-settings { margin-top:var(--sp-6); }
+@media(max-width:767px) {
+  body.lms-body.mock-app .home-start-options { grid-template-columns:minmax(0,1fr); }
+  body.lms-body.mock-app .home-start-option { padding:var(--sp-4); min-height:116px; }
+  body.lms-body.mock-app .home-start > h2 { font-size:18px; }
+}
 body.lms-body.mock-app .home-next { border-top:1px solid var(--pp-line); padding-top:var(--sp-5); margin-top:var(--sp-5); }
 body.lms-body.mock-app .home-next h2 { font-size:20px !important; margin:var(--sp-2) 0 !important; }
 body.lms-body.mock-app .home-next p { margin:var(--sp-2) 0 var(--sp-4); }

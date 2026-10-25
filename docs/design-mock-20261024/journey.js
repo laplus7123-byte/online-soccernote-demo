@@ -91,6 +91,9 @@
       location.href=location.pathname+'?date='+event.target.value;
     });
     $('#journal-activity').value=current().activity;
+    const updateContext=()=>{if($('#daily-context-label'))$('#daily-context-label').textContent=dateLabel(date)+' · '+$('#journal-activity').value;};
+    updateContext();
+    $('#journal-activity').addEventListener('change',updateContext);
     $('#journal-activity').addEventListener('change',event=>{
       write('activity:'+date,event.target.value);
       const all=days(); if (all[date]) { all[date].activity=event.target.value; write('days',all); }
