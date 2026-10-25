@@ -17,8 +17,8 @@
   const validDate = value => /^\d{4}-\d{2}-\d{2}$/.test(value||'') && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0,10)===value;
   const addDays = (date,n) => {const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};
   const dateText = date => {if(!validDate(date))return '期限なし';const d=new Date(date+'T12:00:00Z');return `${d.getUTCMonth()+1}/${d.getUTCDate()}（${'日月火水木金土'[d.getUTCDay()]}）`;};
-  const star = '<svg viewBox="0 0 24 24" class="ico small" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg>';
-  const chevron = '<svg viewBox="0 0 24 24" class="ico small" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>';
+  const star = window.osnIcons.star;
+  const chevron = window.osnIcons.chevron;
   let mode = ['home','calendar','weekly'].includes(page) ? (window.osnJourney.prefix.includes('season-example')?'demo':'own') : ['demo','own'].includes(params.get('tasks')) ? params.get('tasks') : read(base+'mode','demo');
   if(!['demo','own'].includes(mode))mode='demo';
   if(page==='tasks')put(base+'mode',mode);

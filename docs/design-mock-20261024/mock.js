@@ -108,13 +108,13 @@
 
   // Deliberately a sample diagram, not a real video player or remote embed.
   let timer = null;
-  function pauseSample() { clearInterval(timer); timer = null; if ($('[data-player-toggle]')) { $('[data-player-toggle]').setAttribute('aria-label', 'サンプルを再生'); $('[data-player-toggle]').innerHTML = '<svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg>'; } }
+  function pauseSample() { clearInterval(timer); timer = null; if ($('[data-player-toggle]')) { $('[data-player-toggle]').setAttribute('aria-label', 'サンプルを再生'); $('[data-player-toggle]').innerHTML = window.osnIcons.play; } }
   function updateSeek() { $('#current-time').textContent = fmt(Number($('#seek').value)); }
   $('#seek')?.addEventListener('input', updateSeek);
   $('[data-player-toggle]')?.addEventListener('click', event => {
     if (timer) { pauseSample(); return; }
     event.currentTarget.setAttribute('aria-label', 'サンプルを一時停止');
-    event.currentTarget.innerHTML = '<svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>';
+    event.currentTarget.innerHTML = window.osnIcons.pause;
     timer = setInterval(() => { const seek = $('#seek'); seek.value = Math.min(240, Number(seek.value) + 1); updateSeek(); if (Number(seek.value) >= 240) pauseSample(); }, 1000);
   });
   function validateClip() {

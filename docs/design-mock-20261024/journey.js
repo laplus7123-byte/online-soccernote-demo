@@ -19,7 +19,7 @@
   const write = (key, value) => { try { sessionStorage.setItem(prefix + key, JSON.stringify(value)); return true; } catch { return false; } };
   const remove = key => { try { sessionStorage.removeItem(prefix + key); } catch {} };
   const h = value => String(value ?? '').replace(/[&<>"']/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
-  const arrow = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>';
+  const arrow = window.osnIcons.chevron;
   const show = (el, yes) => { if (el) el.hidden = !yes; };
   const validDate = value => /^\d{4}-\d{2}-\d{2}$/.test(value || '') && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0,10) === value;
   const dateLabel = value => { const d = new Date(value + 'T12:00:00+09:00'); return `${d.getUTCMonth()+1}/${d.getUTCDate()}（${'日月火水木金土'[d.getUTCDay()]}）`; };

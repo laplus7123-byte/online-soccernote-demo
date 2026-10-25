@@ -19,7 +19,7 @@
   const show=(el,v)=>{ if(el)el.hidden=!v; };
   const button=(label,attrs='',cls='')=>`<button type="button" class="mock-control ${cls}" ${attrs}>${label}</button>`;
   function toast(message) { const t=$('#toast');t.textContent=message;t.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.hidden=true,4200); }
-  const icon=kind=>`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">${kind==='check'?'<circle cx="12" cy="12" r="9"/><path d="m7 12 4 4 6-8"/>':kind==='warning'?'<path d="m12 3 10 18H2ZM12 9v5m0 3v1"/>':'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>'}</svg>`;
+  const icon=kind=>window.osnIcons[kind==='check'?'checkcircle':kind==='warning'?'warning':'clock'];
   if($('[data-plan-label]'))$('[data-plan-label]').textContent=`選手 / ${plan==='premium'?'プレミアム':'無料プラン'}（表示例）`;
   show($('#video-example'),demo);
   document.addEventListener('click',e=>{ if(e.target.closest('[data-close-premium]'))e.target.closest('dialog').close(); });
