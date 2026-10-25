@@ -1,0 +1,9 @@
+Material Symbols Rounded
+Copyright Google LLC
+Licensed under the Apache License, Version 2.0.
+Source: https://github.com/google/material-design-icons
+Revision: 10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7
+
+Individual SVG paths are embedded without geometry changes in HTML and icons.js.
+Classes and presentation attributes are added for sizing, color and selected state.
+See MATERIAL-ICONS-LICENSE.txt for the complete license.

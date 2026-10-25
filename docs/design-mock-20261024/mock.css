@@ -1548,21 +1548,14 @@ body.lms-body.mock-app .task-context > section:first-child { background:transpar
 body.lms-body.mock-app .home-section-title .quiet-link { min-height:44px; }
 body.lms-body.mock-app .osn-tab-label { font-size:12px; }
 
-/* Original icon family: rounded outlines, quiet tinted planes, clear silhouettes. */
-body.lms-body.mock-app .ico { stroke-linecap:round; stroke-linejoin:round; }
-body.lms-body.mock-app .ico .icon-tone { fill-opacity:.16; }
-body.lms-body.mock-app :is(.side-nav,.app-menu-nav) a[aria-current] .icon-tone,
-body.lms-body.mock-app .osn-tab.is-on .icon-tone { fill-opacity:.32; }
-body.lms-body.mock-app .osn-tab .ico { width:26px; height:26px; }
-body.lms-body.mock-app .osn-tab.is-on .ico { color:var(--accent-deep); stroke-width:2.1; }
-body.lms-body.mock-app .app-menu-nav .ico { width:24px; height:24px; color:var(--accent-deep); }
-body.lms-body.mock-app .side-nav .ico { width:24px; height:24px; }
-body.lms-body.mock-app .type-choice .ico:not(.type-check) { width:26px; height:26px; color:var(--accent-deep); }
-body.lms-body.mock-app .type-choice input:checked + span .icon-tone { fill-opacity:.3; }
-body.lms-body.mock-app .home-start-option,
-body.lms-body.mock-app .home-start-option.is-next { display:grid; grid-template-columns:24px minmax(0,1fr); align-items:center; gap:var(--sp-2); }
-body.lms-body.mock-app .home-action-icon,
-body.lms-body.mock-app .home-start-option.is-next .home-action-icon { display:grid; place-items:center; width:24px; height:28px; background:transparent; color:var(--accent-deep); border-radius:0; }
-body.lms-body.mock-app .home-action-icon .ico { width:24px; height:24px; }
-body.lms-body.mock-app .home-start-copy { min-width:0; }
-body.lms-body.mock-app .calendar-import-entry > .ico:first-child { color:var(--accent-deep); }
+/* Simple monochrome symbols. The icon itself carries no decorative tint. */
+body.lms-body.mock-app .ico-symbol { fill:currentColor !important; stroke:none !important; }
+body.lms-body.mock-app .ico-symbol .symbol-filled { display:none; }
+body.lms-body.mock-app :is(.osn-tab.is-on,.side-nav a[aria-current],.app-menu-nav a[aria-current],.star-choice.is-filled,.task-star[aria-pressed=true]) .symbol-outline { display:none; }
+body.lms-body.mock-app :is(.osn-tab.is-on,.side-nav a[aria-current],.app-menu-nav a[aria-current],.star-choice.is-filled,.task-star[aria-pressed=true]) .symbol-filled { display:inline; }
+body.lms-body.mock-app .osn-tab .ico { width:24px; height:24px; }
+body.lms-body.mock-app .app-menu-nav .ico,body.lms-body.mock-app .side-nav .ico { width:24px; height:24px; color:inherit; }
+body.lms-body.mock-app .type-choice .ico:not(.type-check) { width:22px; height:22px; color:var(--pp-gray); }
+body.lms-body.mock-app .type-choice input:checked + span .ico { color:var(--accent-deep); }
+body.lms-body.mock-app .star-choice.is-filled > span { color:var(--accent-deep); }
+body.lms-body.mock-app .task-star[aria-pressed=true] { color:var(--accent-deep) !important; }
